@@ -10,7 +10,7 @@ import DashboardLayout from "../../components/templates/dashboardLayout";
 
 export default function Home() {
   const { handleGetDataTraining, training } = useContext(MainContext);
-
+  
 
   useEffect(() => {
     handleGetDataTraining();

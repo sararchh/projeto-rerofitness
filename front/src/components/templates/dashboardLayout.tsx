@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <Header />
       <SideMenu />
       <div className="flex items-center justify-center h-screen 
-      w-screen bg-gray-100 box-border scrollbar-hide overflow-auto">
+      bg-gray-100 box-border scrollbar-hide overflow-auto">
         {children}
       </div>
     </>

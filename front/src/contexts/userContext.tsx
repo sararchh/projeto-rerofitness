@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-
 interface UserDataProps {
   token: string,
   userData: any,
