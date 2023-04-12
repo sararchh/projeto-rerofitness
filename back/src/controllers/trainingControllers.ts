@@ -89,8 +89,6 @@ export async function trainingFind(req: AuthenticatedRequest, res: Response) {
     const response = await findTraining(userId);
     return res.status(httpStatus.OK).send(response);
   } catch (error) {
-    console.log(error);
-    
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }

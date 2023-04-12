@@ -26,6 +26,6 @@ export async function singInPost(req: Request, res: Response) {
     return res.status(httpStatus.OK).send({token: result[0].token, userData: result[0].userData});
 } catch (error) {
 
-  return res.sendStatus(422);
+  return res.status(422).send(error);
 }
 }
