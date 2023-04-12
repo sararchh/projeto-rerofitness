@@ -37,6 +37,8 @@ services:
     build: ./nginx
     ports:
       - 80:80
+    volumes:
+      - react-volume:/var/www/html
     depends_on:
       - mongodb
       - node

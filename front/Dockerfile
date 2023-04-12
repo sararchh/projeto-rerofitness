@@ -1,5 +1,5 @@
 # evitar problema de routines error:0308010C:digital envelope routines::unsupported
-FROM node
+FROM node:16
 
 # pasta para onde vai o build
 WORKDIR /tmp/react
@@ -20,7 +20,7 @@ RUN npm run build
 RUN mkdir -p /var/www/html
 
 # move o conteúdo
-RUN mv build/* /var/www/html
+RUN mv dist/* /var/www/html
 
 # sai da pasta
 WORKDIR /
