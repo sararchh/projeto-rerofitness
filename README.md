@@ -67,7 +67,7 @@ npm start
 docker-compose up
 ```
 
-## Access in the browser
+## Access in browser using docker
 ```
 http://localhost:80
 ```
