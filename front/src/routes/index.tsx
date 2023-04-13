@@ -1,8 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from '../pages/login';
 import CreateTraining from '../pages/createTraining';
 import Home from '../pages/home';
+import useToken from '../hooks/useToken';
+import Register from '../pages/register';
 
 const NotFound = () => {
   return (
@@ -10,7 +12,17 @@ const NotFound = () => {
   )
 }
 
-//TODO tratamento de rotas privadas
+const ProtectedRouteGuard = ({ children }: any) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
+  return <>
+    {children}
+  </>;
+}
 
 function RoutesApp() {
   return (
@@ -18,8 +30,10 @@ function RoutesApp() {
       <Routes>
 
         <Route path='/' element={<Login />} />
-        <Route path='/createTraining' element={<CreateTraining />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+
+        <Route path='/home' element={<ProtectedRouteGuard><Home /></ProtectedRouteGuard>} />
+        <Route path='/createTraining' element={<ProtectedRouteGuard><CreateTraining /> </ProtectedRouteGuard>} />
 
         <Route path='*' element={<NotFound />} />
       </Routes>

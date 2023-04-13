@@ -13,14 +13,11 @@ import * as z from 'zod';
 
 import Logo from "../../assets/logo.png";
 import useToken from "../../hooks/useToken";
-import { UserContext } from "../../contexts/userContext";
-import { postSignIn, postSignUp } from "../../services/authApi";
+import { postSignUp } from "../../services/authApi";
 
-export default function Login() {
+export default function Register() {
   const token = useToken();
   const navigate = useNavigate();
-
-  const { setUserData } = useContext(UserContext);
 
   useEffect(() => {
     if (token) {
@@ -28,10 +25,11 @@ export default function Login() {
     }
   }, [token]);
 
-
   const schema = z.object({
     email: z.string().min(1, { message: 'Required' }).nonempty("Is required"),
     password: z.string().min(1, { message: 'Required' }).nonempty("Is required"),
+    name: z.string().min(1, { message: 'Required' }).nonempty("Is required"),
+    image: z.string().min(1, { message: 'Required' }).nonempty("Is required"),
   });
 
   const { setValue, getValues } = useForm({
@@ -42,15 +40,12 @@ export default function Login() {
     e.preventDefault();
     const values = getValues();
     
+
     try {
-        const data = await postSignIn(values);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userData", JSON.stringify(data.userData));
-        setUserData(data.userData);
-        navigate("/home");
-
+        await postSignUp(values);
+        toast.success("Cadastro feito com sucesso!");
+        navigate("/")
     } catch (error: any) {
-
       if (error.response.status === 422) {
         return toast.error("Verifique os campos")
       }
@@ -89,13 +84,29 @@ export default function Login() {
             onChangeText={(value: string) => setValue("password", value)}
           />
 
+              <InputStyled
+                placeholder="Digite seu nome"
+                name="name"
+                value={getValues("name")}
+                onChangeText={(value: string) => setValue("name", value)}
+              />
+
+              <InputStyled
+                placeholder="Url do seu avatar"
+                name="image"
+                value={getValues("image")}
+                onChangeText={(value: string) => setValue("image", value)}
+              />
+
           <ButtonStyled>
-            <p className="text-2xl w-[150px] font-bold ml-2">Acessar</p>
+            <p className="text-2xl w-[150px] font-bold ml-2">Cadastrar</p>
           </ButtonStyled>
         </form>
 
-        <button onClick={() => { navigate("/register");}}>
-          <p className="mt-2">Não tem cadastro? Cadastre-se  </p>
+        <button onClick={() => navigate("/") }>
+          <p className="mt-2">
+              Já tem cadastro? Realize o login
+          </p>
         </button>
 
       </div>

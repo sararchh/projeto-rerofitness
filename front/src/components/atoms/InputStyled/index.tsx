@@ -11,7 +11,7 @@ interface InputStyledProps {
 
 const InputStyled: React.FC<InputStyledProps> = ({ type = "text", placeholder, name, value, onChangeText, w = "w-64" }) => {
 
-  let classInput = "h-12 leading-5 relative my-2 py-2 px-4 mt-6 rounded text-gray-800 bg-gray-100  border-none overflow-x-auto focus:outline-none focus:border-gray-400 focus:ring-0 "
+  let classInput = "h-12 leading-5 relative my-2 py-2 px-4 mt-2 rounded text-gray-800 bg-gray-100  border-none overflow-x-auto focus:outline-none focus:border-gray-400 focus:ring-0 "
   
   return (
     <input
